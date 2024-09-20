@@ -40,7 +40,6 @@ class _VideoDetailPageState extends State<VideoDetailPage> {
   ];
   @override
   void initState() {
-
     for (int index = 0; index < videoData.length; index++) {
       videoData[index].Controller =
           VideoPlayerController.networkUrl(Uri.parse(Videos[index]))
@@ -58,7 +57,7 @@ class _VideoDetailPageState extends State<VideoDetailPage> {
         leading: InkWell(
           onTap: () async {
             Navigator.pop(context);
-            for (int index = 0; index < videoData.length; index++){
+            for (int index = 0; index < videoData.length; index++) {
               await videoData[index].Controller.pause();
             }
           },
@@ -84,16 +83,19 @@ class _VideoDetailPageState extends State<VideoDetailPage> {
                 children: [
                   videoData[index].Controller.value.isInitialized
                       ? Container(
-                    height: 400,width: 400,color: Colors.grey.shade600,
-                        child: Padding(
-                          padding: const EdgeInsets.all(2),
-                          child: AspectRatio(
+                          height: 400,
+                          width: 400,
+                          color: Colors.grey.shade600,
+                          child: Padding(                            padding: const EdgeInsets.all(2),
+                            child: AspectRatio(
                               aspectRatio: 0.9,
                               child: VideoPlayer(videoData[index].Controller),
                             ),
+                          ),
+                        )
+                      : CircularProgressIndicator(
+                          color: Colors.white,
                         ),
-                      )
-                      : CircularProgressIndicator(color: Colors.white,),
                   Padding(
                     padding: const EdgeInsets.only(top: 30),
                     child: Row(
@@ -188,9 +190,9 @@ class _VideoDetailPageState extends State<VideoDetailPage> {
         options: CarouselOptions(
           height: double.infinity,
           viewportFraction: 0.94,
-          onPageChanged: (index, reason ) async {
+          onPageChanged: (index, reason) async {
             videoProvider.changeIndex(index);
-            for (int index = 0; index < videoData.length; index++){
+            for (int index = 0; index < videoData.length; index++) {
               await videoData[index].Controller.pause();
             }
             // videoData[VideoProvider().index].Controller = VideoPlayerController

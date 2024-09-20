@@ -100,41 +100,45 @@ class _MusicState extends State<Music> with SingleTickerProviderStateMixin {
               children: [
                 SizedBox(height: 30),
                 Center(
-                    child: Text(
-                  'Audio List',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                      fontSize: 25,
-                      color: Colors.white
+                  child: Text(
+                    'Audio List',
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 25,
+                        color: Colors.white),
                   ),
                 ),
-                ),
-                for(int index = 0 ; index < AudioData.length;index++)...[
+                for (int index = 0; index < AudioData.length; index++) ...[
                   InkWell(
                     onTap: () {
-                      Navigator.of(context).push(MaterialPageRoute(builder: (context)=>AudioDetailPage()));
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => AudioDetailPage()));
                       Controller.jumpToPage(index);
                     },
                     child: ListTile(
                       leading: ClipRRect(
                         borderRadius: BorderRadius.circular(5),
-                        child: Image.asset(AudioData[index].Image,height: 50,width: 50,fit: BoxFit.fill,),
+                        child: Image.asset(
+                          AudioData[index].Image,
+                          height: 50,
+                          width: 50,
+                          fit: BoxFit.fill,
+                        ),
                       ),
                       title: Text(
                         AudioData[index].Name,
                         style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white
-                        ),
+                            fontWeight: FontWeight.bold, color: Colors.white),
                       ),
                       subtitle: Text(
                         AudioData[index].Artist,
                         style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                          color: Colors.grey
-                        ),
+                            fontWeight: FontWeight.bold, color: Colors.grey),
                       ),
-                      trailing: Icon(Icons.play_circle_outline_rounded,color: Colors.white,),
+                      trailing: Icon(
+                        Icons.play_circle_outline_rounded,
+                        color: Colors.white,
+                      ),
                     ),
                   ),
                   Padding(
@@ -153,13 +157,14 @@ class _MusicState extends State<Music> with SingleTickerProviderStateMixin {
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 25,
-                        color: Colors.white
-                    ),
-                  ),),
-                for(int index = 0 ; index < videoData.length;index++)...[
+                        color: Colors.white),
+                  ),
+                ),
+                for (int index = 0; index < videoData.length; index++) ...[
                   InkWell(
                     onTap: () {
-                      Navigator.of(context).push(MaterialPageRoute(builder: (context) => VideoDetailPage()));
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => VideoDetailPage()));
                       Controller.jumpToPage(index);
                     },
                     child: Padding(
@@ -167,16 +172,22 @@ class _MusicState extends State<Music> with SingleTickerProviderStateMixin {
                       child: ListTile(
                         leading: ClipRRect(
                           borderRadius: BorderRadius.circular(5),
-                          child: Image.asset(AudioData[index].Image,height: 50,width: 50,fit: BoxFit.fill,),
+                          child: Image.asset(
+                            AudioData[index].Image,
+                            height: 50,
+                            width: 50,
+                            fit: BoxFit.fill,
+                          ),
                         ),
                         title: Text(
                           videoData[index].Name,
                           style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white
-                          ),
+                              fontWeight: FontWeight.bold, color: Colors.white),
                         ),
-                        trailing: Icon(Icons.play_circle_outline_rounded,color: Colors.white,),
+                        trailing: Icon(
+                          Icons.play_circle_outline_rounded,
+                          color: Colors.white,
+                        ),
                       ),
                     ),
                   ),
@@ -213,11 +224,10 @@ class _MusicState extends State<Music> with SingleTickerProviderStateMixin {
                   icon: Icon(Icons.video_camera_back_outlined),
                   text: 'Video',
                 ),
-              ]
-          ),
-        )
-    );
+              ]),
+        ));
   }
+
   Future<void> initAudio() async {
     for (int index = 0; index < AudioData.length; index++) {
       await AudioData[index]
@@ -227,7 +237,8 @@ class _MusicState extends State<Music> with SingleTickerProviderStateMixin {
         if (event != null) {
           Duration duration = event.audio.duration;
           DurationList.add(duration);
-          setState(() {}); // Trigger a rebuild to update your UI with the loaded audio data
+          setState(
+              () {}); // Trigger a rebuild to update your UI with the loaded audio data
         }
       });
     }

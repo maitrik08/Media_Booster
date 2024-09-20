@@ -9,7 +9,7 @@ import 'package:media_player/DataModel.dart';
 import 'package:provider/provider.dart';
 
 class AudioDetailPage extends StatefulWidget {
-   AudioDetailPage({super.key});
+  AudioDetailPage({super.key});
 
   @override
   State<AudioDetailPage> createState() => _AudioDetailPageState();
@@ -45,7 +45,7 @@ class _AudioDetailPageState extends State<AudioDetailPage> {
         Name: 'Vhalam Avo ne',
         Artist: 'Jigardan Gadhavi',
         Image: 'Assets/Images/valam.jpg',
-        Song: 'Assets/Song/Vhalam.mp3',
+        Song: 'Assets/Song/Vh  alam.mp3',
         Controller: AssetsAudioPlayer())
   ];
   CarouselController Controller = CarouselController();
@@ -53,13 +53,10 @@ class _AudioDetailPageState extends State<AudioDetailPage> {
   @override
   void initState() {
     for (int index = 0; index < AudioData.length; index++) {
-       AudioData[index].Controller.open(
-          Audio(AudioData[index].Song),
-          autoStart: false);
-       AudioData[index]
+      AudioData[index]
           .Controller
-          .current
-          .listen((event) {
+          .open(Audio(AudioData[index].Song), autoStart: false);
+      AudioData[index].Controller.current.listen((event) {
         if (event != null) {
           Duration duration = event.audio.duration;
           DurationList.add(duration);
@@ -69,6 +66,7 @@ class _AudioDetailPageState extends State<AudioDetailPage> {
     }
     super.initState();
   }
+
   Widget build(BuildContext context) {
     final audioProvider = Provider.of<AudioProvider>(context);
     return Scaffold(
@@ -87,8 +85,8 @@ class _AudioDetailPageState extends State<AudioDetailPage> {
                       fit: BoxFit.fitHeight,
                     )),
                 Padding(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 20, vertical: 20),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
                   child: Column(
                     children: [
                       Row(
@@ -107,8 +105,7 @@ class _AudioDetailPageState extends State<AudioDetailPage> {
                             children: [
                               Text(
                                 'PLAYING FROM PLAYLIST',
-                                style: TextStyle(
-                                    color: Colors.grey.shade100),
+                                style: TextStyle(color: Colors.grey.shade100),
                               ),
                               Text(
                                 'Release Radar',
@@ -174,7 +171,7 @@ class _AudioDetailPageState extends State<AudioDetailPage> {
                               progress: currentPosition,
                               total: DurationList[audioProvider.index],
                               buffered:
-                              currentPosition, // You might want to update this as well
+                                  currentPosition, // You might want to update this as well
                               onSeek: (value) {
                                 AudioData[audioProvider.index]
                                     .Controller
@@ -185,7 +182,7 @@ class _AudioDetailPageState extends State<AudioDetailPage> {
                               baseBarColor: Colors.grey.shade700,
                               timeLabelPadding: 10,
                               timeLabelTextStyle:
-                              TextStyle(color: Colors.white),
+                                  TextStyle(color: Colors.white),
                             );
                           } else {
                             return CircularProgressIndicator(); // You can show a loading indicator while the position is being loaded
@@ -264,19 +261,16 @@ class _AudioDetailPageState extends State<AudioDetailPage> {
           height: double.infinity,
           viewportFraction: 0.94,
           onPageChanged: (index, reason) async {
-            for (int index = 0; index < AudioData.length; index++){
+            for (int index = 0; index < AudioData.length; index++) {
               await AudioData[index].Controller.stop();
             }
             audioProvider.changeIndex(index);
             print(audioProvider.index);
             for (int index = 0; index < AudioData.length; index++) {
-              await AudioData[index].Controller.open(
-                  Audio(AudioData[index].Song),
-                  autoStart: false);
               await AudioData[index]
                   .Controller
-                  .current
-                  .listen((event) {
+                  .open(Audio(AudioData[index].Song), autoStart: false);
+              await AudioData[index].Controller.current.listen((event) {
                 if (event != null) {
                   Duration duration = event.audio.duration;
                   DurationList.add(duration);

@@ -6,16 +6,15 @@ import 'package:media_player/VideoProvider.dart';
 import 'package:provider/provider.dart';
 
 void main() {
-  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(statusBarColor: Colors.transparent));
-  runApp(
-    MultiProvider(
-      providers: [
-        ChangeNotifierProvider<AudioProvider>(create: (_) => AudioProvider()),
-        ChangeNotifierProvider<VideoProvider>(create: (_) => VideoProvider()),
-      ],
-      child: const MyApp(),
-    )
-  );
+  SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle(statusBarColor: Colors.transparent));
+  runApp(MultiProvider(
+    providers: [
+      ChangeNotifierProvider<AudioProvider>(create: (_) => AudioProvider()),
+      ChangeNotifierProvider<VideoProvider>(create: (_) => VideoProvider()),
+    ],
+    child: const MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
